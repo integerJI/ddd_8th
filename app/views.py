@@ -8,6 +8,22 @@ import json
 def index(request):
     return render(request, 'index.html')
 
+def list(request):
+    response = {}
+    
+    body = request.body.decode('utf8')
+    data = json.loads(body)
+
+    list_data = [1,2,3,4]
+
+    response["result"] = "true"
+    response["status_code"] = "200"
+    response["message"] = "성공!"
+    response["return_url"] = "/"
+    response["data"] = list_data
+
+    return JsonResponse(response, json_dumps_params = {'ensure_ascii': False})
+
 # class CreateInvitationView(View):
 #     def get(self, request):
 #         return render(request, 'create.html')
