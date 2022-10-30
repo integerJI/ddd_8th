@@ -1,8 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
-from django.utils import timezone
-from django.views import View
-import string, random
 import json
 
 def index(request):
@@ -11,17 +8,27 @@ def index(request):
 def list(request):
     response = {}
     
-    body = request.body.decode('utf8')
-    data = json.loads(body)
-
-    list_data = [1,2,3,4]
+    data_list = [1,2,3]
 
     response["result"] = "true"
     response["status_code"] = "200"
-    response["message"] = "성공!"
+    response["message"] = "success"
     response["return_url"] = "/"
-    response["data"] = list_data
+    response["data"] = data_list
+    
+    return JsonResponse(response, json_dumps_params = {'ensure_ascii': False})
 
+def model(request):
+    response = {}
+    
+    data_model = {"id":1, "title":"title", "context":"context"}
+
+    response["result"] = "true"
+    response["status_code"] = "200"
+    response["message"] = "success"
+    response["return_url"] = "/"
+    response["data"] = data_model
+    
     return JsonResponse(response, json_dumps_params = {'ensure_ascii': False})
 
 # class CreateInvitationView(View):
