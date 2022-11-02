@@ -1,12 +1,53 @@
-<p>list 반환 형식</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
 
-<a href="{% url 'main:list' %}">>> 바로가기</a>
+    <p><a href="{% url 'member:singup' %}">횐갑</a></p>
 
-<p>model 반환 형식</p>
+    <button id="test_btn">list 반환</button>
+    <p id="test_p"></p>
+    <button id="model_btn">model 반환</button>
+    <p id="model_p"></p>
 
-<a href="{% url 'main:model' %}">>> 바로가기</a>
+    <script>
+        document.getElementById("test_btn").addEventListener("click", () => {
 
-<p>회원가입</p>
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = (e) => {
+                let req = e.target;
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
+                        document.getElementById("test_p").innerHTML = "통신성공 : "+req.responseText;
+                    }
+                }
+            }
 
-<a href="{% url 'member:singup' %}">>> 바로가기</a>
+            xhttp.open("GET", "{% url 'main:list' %}", true);
+            xhttp.send();
+        });
 
+        document.getElementById("model_btn").addEventListener("click", () => {
+
+            let xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = (e) => {
+                let req = e.target;
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
+                        document.getElementById("model_p").innerHTML = "통신성공 : "+req.responseText;
+                    }
+                }
+            }
+
+            xhttp.open("GET", "{% url 'main:model' %}", true);
+            xhttp.send();
+        });
+    </script> 
+
+</body>
+</html>
