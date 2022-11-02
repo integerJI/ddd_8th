@@ -24,6 +24,11 @@
             let xhttp = new XMLHttpRequest();
             xhttp.onreadystatechange = (e) => {
                 let req = e.target;
+                if (req.readyState === XMLHttpRequest.DONE) {
+                    if (req.status === 200) {
+                        document.getElementById("test_p").innerHTML = "통신성공 : "+req.responseText;
+                    }
+                }
             }
 
             xhttp.open("POST", "{% url 'member:singup' %}", true);
